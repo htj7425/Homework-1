@@ -117,7 +117,6 @@ $ command -a -b -- -c
 
 때문에 ***getopts*** 로 **short, long** 옵션을 동시에 처리는 매우 어려움 / 그래서 먼저 **long** 옵션을 처리하고 **long** 옵션 부분을 제거해낸 나머지를 ***getopts***에 넘겨주어 **short** 옵션을 처리하는 방식을 사용함
 
----
 
 ### **Error reporting**
 
