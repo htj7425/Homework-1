@@ -1,7 +1,7 @@
 # Homework-1
 ---
 ## **getopts 명령어**
-
+ 
 + 쉘에서 명령을 실행할 때 옵션을 사용하는데 스크립트 파일이나 함수를 실행할 때 또한 옵션을 사용할 수 있음.
 + 이 때 스크립트 내에서 직접 옵션을 해석해서 사용해야 하는데 이 작업을 쉽게 도와주는 명령어가 ***getopts***
 + ***getopts*** 명령을 이용하지 않고 직접 옵션을 처리하려면 옵션을 처리에만 스크립트가 복잡해질 수 있음.
@@ -220,7 +220,138 @@ $ ./test.sh -a123 -bc hello.c -- -x --yyy
 
 ---
 
+## **awk 명령어**
+
+`awk [OPTION] [awk program] [ARGUMENT]`
+
++ 파일로부터 레코드를 선택하고, 선택된 레코드에 포함된 값을 조작하거나 데이터화 함
++ awk라는 이름은 기능을 디자인한 사람들 **A**ho, **W**einberger, **K**ernighan 의 이니셜을 조합하여 만들었음
+
+### **awk 명령 사용 용도**
+
+1) 텍스트 파일의 전체 내용 출력
+2) 파일의 특정 필드 출력
+3) 특정 필드에 문자열을 추가해서 출력
+4) 패턴이 포함된 레코드 출력
+5) 특정 필드에 연산 수행 결과 출력
+6) 필드 값 비교에 따라 레코드 출력
+
+### **awk 명령어 옵션**
+
+
+|**option 종류**||
+|---|---|
+|-F |필드 구분 문자 지정|
+|-f |awk program 파일 경로 지정|
+|-v |awk program에서 사용될 특정 variable값 지정|
+
+*awk program* : f 옵션이 사용되지 않은 경우, awk가 실행할 awk program 코드 지정함
+
+*ARGUMENT* : 입력 파일 지정 또는 variable 값 지정
+
+### **awk 명령 예시**
+
+1) 텍스트 파일의 전체 내용 출력
+
+![image](https://user-images.githubusercontent.com/43903354/142623584-048338ae-3e03-4869-a323-1d0669f6f2e8.png)
+
+2) 파일의 특정 필드 출력
+
+![image](https://user-images.githubusercontent.com/43903354/142623623-559da6b2-2b3c-482e-9ca2-fc94fb643541.png)
+![image](https://user-images.githubusercontent.com/43903354/142623633-ef3572cf-c5a9-4ae0-8eff-9701944fae30.png)
+![image](https://user-images.githubusercontent.com/43903354/142623647-3460b926-70ca-407d-ae15-2f3865d1ce9f.png)
+![image](https://user-images.githubusercontent.com/43903354/142623671-c16bdfa6-eaaa-474c-ae7f-12bb5c6c2a59.png)
+
+3) 특정 필드에 문자열을 추가해서 출력
+
+![image](https://user-images.githubusercontent.com/43903354/142623742-d505afa3-0b32-4b37-8330-3c798cd0c66d.png)
+
+4) 패턴이 포함된 레코드 출력
+
+![image](https://user-images.githubusercontent.com/43903354/142623797-17d9824e-0bfa-4c1e-910d-4311fc573d14.png)
+
+5) 특정 필드에 연산 수행 결과 출력
+
+![image](https://user-images.githubusercontent.com/43903354/142623895-067b8fb5-2089-4cef-a833-485f2f8a9530.png)
+
+6) 필드 값 비교에 따라 레코드 출력
+
+![image](https://user-images.githubusercontent.com/43903354/142623974-973e586f-39bf-4b16-a527-001c752e55ba.png)
+
+---
+
+
 ## **sed 명령어**
 
+`sed -n -e 'command' [input file]`
 
++ SED는 **S**tream **Ed**itor의 약자
++ 원본 텍스트 파일을 편집하는 명령어
++ vi 편집기와 달리 실시간 저장이 불가능
++ 내부적으로 저장 공간 버퍼를 사용 (**패턴 버퍼**, **홀드 버퍼**) // 파일의 내용을 **패턴 버퍼**에 가져온 후 변형과 추가를 위해 **홀드 버퍼**를 
+
+|vi에디터|sed|
+|---|---|
+|실시간 저장 가능|실시간 저장 불가능|
+|원본을 건드리며 변경|원본을 건드리지 않으며 변경 가능|
+
+|**option 종류**||
+|---|---|
+|-n|sed는 내용을 자동적으로 출력 해주는데 `-n`옵션을 사용시 자동출력 X|
+|-e|우리가 사용하는 command로 텍스트 파일을 가공해줌|
+
+1) **특정 행을 출력 -p (print)**
+
+    **p**는 **print**를 의미
+  
+  + 전체 내용 출력 : command => `/$/p` 또는 `1,$p`
+  ![image](https://user-images.githubusercontent.com/43903354/142633721-cea3104e-a2c4-461d-8234-b7f31fe6d39e.png)
+
+  + 첫번째 줄 출력 : command => `1p`
+  ![image](https://user-images.githubusercontent.com/43903354/142633972-2dad814b-c7e4-42e4-8905-b32ab8c075fc.png)
+  
+  + **start ~ end** 줄까지 출력
+  
+  ![image](https://user-images.githubusercontent.com/43903354/142634371-5e38b076-d0c1-4e9a-9603-586f53306273.png)
+  
+  + 특정줄에서 마지막 줄까지 출력
+  ![image](https://user-images.githubusercontent.com/43903354/142634636-edc9777c-5bbd-4ac7-91e7-89eaa16c3cb8.png)
+
+  + 다중 command 사용
+  ![image](https://user-images.githubusercontent.com/43903354/142634868-89b07a35-21eb-4a0f-9fca-d499bead3e28.png)
+
+  + 특정 문자열이 있는 줄 출력
+  ![image](https://user-images.githubusercontent.com/43903354/142635431-32d2759a-5d12-44fd-bc9b-12a76702dbc4.png)
+  
+2) **특정 행 삭제 -d (delete)**
+
+  + 2~3번 째 줄을 삭제하고 나머지 모든 내용 출력
+  ![image](https://user-images.githubusercontent.com/43903354/142635784-6baf2d12-eafd-4bf5-b8f6-56e9bd76fd15.png)
+  
+3) **단어 치환 -s (Substitute)**
+  
+  + 기본적인 특정 단어 치환 ( s는 substitute의 약자 그리고 g는 global의 약자로 전체에 적용됨을 의미 )
+  ![image](https://user-images.githubusercontent.com/43903354/142636219-6d01f334-e03c-4c8e-9fa4-fe7130900671.png)
+  
+  + 특정 단어로 시작 혹은 끝나는 단어를 포함하는 라인의 문자열 치환
+  ![image](https://user-images.githubusercontent.com/43903354/142636688-e53a0694-a95d-447f-b3dd-cd03b258948b.png)
+  ![image](https://user-images.githubusercontent.com/43903354/142636948-9c4116db-19a5-496f-a9b9-43b7422868ee.png)
+  
+4) **문자열 추가 -a, i (append, insert)
+  ```
+  /찾을 문자열/a\다음 줄에 추가할 문자열
+  /찾을 문자열/i\위에 삽입할 문자열
+  ```
+  
+  ![image](https://user-images.githubusercontent.com/43903354/142637779-138a2151-2a0f-498a-9d48-7bf78740e9bb.png)
+  
+5) **특정 행의 내용을 전부 교체 -c (change)**
+`/바꿀 행이 포함한 문자열/c\바꿀 행의 내용
+
+  ![image](https://user-images.githubusercontent.com/43903354/142638285-113a11c1-11e9-4728-ae96-b5ff5c49b44c.png)
+  
+6) **특정 행에 파일의 내용을 추가 -r (read)**
+
+  + 100으로 끝나는 줄의 아랫줄에 텍스트 파일의 내용을 추가
+  ![image](https://user-images.githubusercontent.com/43903354/142638836-c03dbeb9-6cda-4d5e-b63a-dae0ae457e97.png)
 
