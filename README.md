@@ -168,3 +168,54 @@ $ getopt -o a:bc -l help,path:,name: -- "$@"
 ```
 + 설정하지 않은 옵션이 사용되거나 옵션 인수가 빠지면 오류 메시지를 출력 해줌
 
+```bash
+#!/bin/bash
+
+
+options=$( getopt -o a:bc -l help,path:,name: -- "$@" )
+echo "$options"
+---------------------------------------------------------
+
+
+$ ./test.sh -x
+getopt: invalid option -- 'x'
+
+$ ./test.sh --xxx
+getopt: unrecognized option '--xxx'
+
+4 ./test.sh -a
+getopt: option requires an argument -- 'a'
+
+$ ./test.sh --name
+getopt: option '--name' requires an argument
+
+```
+
+
++ 그리고 `getopt` 명령의 특징은 `getopts` 에서는 힘들게 분류하여 사용했던 옵션들을 사용하기 좋게 정렬해줌
+```bash
+#!/bin/bash
+
+options=$( getopt -o a:bc -l help,path:,name: -- "$@" )
+echo "$options"
+-------------------------------------------------------
+
+
+$ ./test.sh -a123 -bc hello.c
+-a '123' -bc -- 'hello.c'
+# -a123 이 -a와 '123'으로 분리
+# -bc 는 -b 와 -c로 분리
+# 옵션이 아닌 hello.c는 '--' 뒤로 이동
+
+$ ./test.sh --name foo --path=/usr/bin
+--name 'foo' --path '/usr/bin' --
+# --path=/usr/bin 이 --path '/usr/bin' 으로 분리
+
+$ ./test.sh -a123 -bc hello.c -- -x --yyy
+-a '123' -b -c -- 'hello.c' '-x' '--yyy'
+# 중간에 파일명이 와도 잘 처리해줌
+# '--' 도 알맞게 잘 처리해줌
+
+```
+
+
